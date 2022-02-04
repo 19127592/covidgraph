@@ -1,10 +1,24 @@
+from turtle import width
 from urllib import request
 from django.shortcuts import render
 
-from collections import Counter
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.offline import plot
 
 def home(request):
-    return render(request,'mainpage/homepage/home.html')
+    x_data = [0,1,2,3]
+    y_data = [x**2 for x in x_data]
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=x_data, y=y_data,
+                        mode='lines', name='test',
+                        opacity=0.8, marker_color='green'))
+
+    fig.update_layout(width=500,height=300)
+    
+    plot_div = plot(fig, output_type='div', include_plotlyjs=False)
+
+    return render(request,'mainpage/homepage/home.html', context={'plot_div': plot_div})
 
 def about(request):
     return render(request,'mainpage/about/about.html')
