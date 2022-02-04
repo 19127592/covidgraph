@@ -1,0 +1,12 @@
+<h2>There are {{count}} words</h2>
+<h3>{{ fulltext }}</h3>
+
+<h3>
+    Most frequent character is 
+    {% for item in most_frequent %} 
+    <span>
+        character "{{item.0}}" with {{item.1}} times
+    </span>
+</h3>
+{%endfor%}
+<a href="{% url 'test' %}">Start again</a>
